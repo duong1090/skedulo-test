@@ -1,0 +1,12 @@
+@import "styles/variables.module";
+@import "styles/mixin";
+
+.feat-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: map-get($size, l5);
+
+  @include responsive-mobile {
+    gap: map-get($size, l4);
+  }
+}

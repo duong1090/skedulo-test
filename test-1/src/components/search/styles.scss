@@ -1,0 +1,50 @@
+@import "styles/variables.module";
+
+.cmp-search {
+  background-color: map-get($colors, white);
+  padding: map-get($size, l3) map-get($size, l5);
+  border-radius: map-get($size, l2);
+  gap: map-get($size, l2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 250px;
+
+  &__input {
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    flex: 1;
+    color: map-get($colors, dark);
+
+    &::placeholder {
+      color: map-get($colors, secondary);
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    padding: map-get($size, l2);
+    border-radius: map-get($size, l2);
+    background-color: map-get($colors, blue100);
+
+    &__icon {
+      width: map-get($size, l5);
+      height: map-get($size, l5);
+      fill: map-get($colors, white);
+    }
+
+    &:hover {
+      background-color: map-get($colors, blue200);
+    }
+
+    &:disabled {
+      background-color: map-get($colors, grey100);
+      cursor: default;
+    }
+  }
+}

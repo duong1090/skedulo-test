@@ -1,0 +1,17 @@
+@import "styles/variables.module";
+@import "styles/mixin";
+
+.app {
+  display: flex;
+  justify-content: center;
+}
+
+.main-container {
+  max-width: 1140px;
+  padding: map-get($size, l10);
+  flex: 1;
+
+  @include responsive-mobile {
+    padding: map-get($size, l4);
+  }
+}

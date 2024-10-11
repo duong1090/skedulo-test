@@ -1,0 +1,80 @@
+@import "styles/variables.module";
+@import "styles/mixin";
+
+.cmp-table {
+  max-height: calc(100vh - 160px);
+  border-radius: map-get($size, l2);
+  overflow-y: auto;
+
+  @include responsive-mobile {
+    max-height: calc(100vh - 100px);
+  }
+
+  table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: map-get($size, l2);
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+
+    * {
+      position: relative;
+    }
+
+    td,
+    th {
+      padding-left: map-get($size, l4);
+      padding-block: map-get($size, l2);
+      text-align: left;
+    }
+
+    th {
+      font-size: 1rem;
+      color: map-get($colors, white);
+      font-weight: bold;
+    }
+
+    thead {
+      tr {
+        height: 60px;
+        background: map-get($colors, primary);
+      }
+    }
+
+    tbody {
+      max-width: 100%;
+      tr:last-child {
+        border: 0;
+      }
+
+      tr:nth-child(even) {
+        background-color: map-get($colors, grey100);
+      }
+
+      tr {
+        font-size: 1rem;
+        color: map-get($colors, grey200);
+        line-height: 1.2;
+        font-weight: unset;
+      }
+
+      tr:hover {
+        color: map-get($colors, grey200);
+        background-color: map-get($colors, grey100);
+        cursor: pointer;
+      }
+    }
+  }
+  .no-data {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: map-get($colors, grey100);
+    border-radius: map-get($size, l2);
+    color: map-get($colors, secondary);
+  }
+}
