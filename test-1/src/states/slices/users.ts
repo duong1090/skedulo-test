@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getGithubUsers } from "api";
+import { searchUsersApi } from "api";
 import { mapUser, User } from "model";
 import { RootState } from "states/store";
 
@@ -20,44 +20,21 @@ export const getUsersAsync = createAsyncThunk<
   { state: RootState }
 >("users/getMany", async (arg, thunkApi) => {
   try {
-    const response = await getGithubUsers({
+    const response = await searchUsersApi({
       perPage: arg.perPage,
+      query: arg.searchTerm,
     });
 
     // delay for smoother loading animation
     await delay(1000);
 
-    return response.data?.map((i) =>
-      mapUser(i, { score: calculateScore(arg.searchTerm, i.login) }),
-    );
+    return response.data?.items?.map(mapUser);
   } catch (e) {
     return Promise.reject(e);
   }
 });
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const calculateScore = (searchTerm: string, username: string): number => {
-  if (!searchTerm || !username) {
-    return 0; // Return 0 if either is empty
-  }
-
-  // Convert both to lower case for case insensitive comparison
-  const lowerSearchTerm = searchTerm.toLowerCase();
-  const lowerUsername = username.toLowerCase();
-
-  // Check for exact match
-  if (lowerUsername === lowerSearchTerm) {
-    return 1.0; // Exact match score
-  }
-
-  // Calculate partial match score
-  const score = lowerUsername.includes(lowerSearchTerm)
-    ? lowerSearchTerm.length / lowerUsername.length
-    : 0;
-
-  return parseFloat(score.toFixed(2));
-};
 
 // slice --------------------------------------------------------------------------------------------------------
 export const usersSlice = createSlice({

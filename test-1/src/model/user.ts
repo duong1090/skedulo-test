@@ -12,9 +12,9 @@ export interface UserApiResponse {
   score: number;
 }
 
-export const mapUser = (responseData: UserApiResponse, extra: any): User => ({
+export const mapUser = (responseData: UserApiResponse): User => ({
   avatar: responseData.avatar_url,
   username: responseData.login,
   type: responseData.type,
-  ...extra,
+  score: responseData.score,
 });
